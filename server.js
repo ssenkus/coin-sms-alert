@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const _ = require('underscore')
+const Alarm = require('./models/alarm');
+
 const app = express();
 
 
@@ -12,10 +15,20 @@ app.get('/', (req, res) => {
 
 app.get('/api/coins', (req, res) => {
     request.get('https://api.coinmarketcap.com/v1/ticker/', (err, response, body) => {
-        let coinData = JSON.parse(body);
+        let coinsData = JSON.parse(body);
+        let alarm = new Alarm({
+            coinId: 'bitcoin',
+            priceUsdThreshold: 10000.00,
+            thresholdDirection: 'over'
+        });
 
-        console.log(coinData);
-        res.json(coinData);
+        let latestCoinData = _.findWhere(coinsData, { id: alarm.coinId});
+
+        if (latestCoinData && alarm.isTriggered(latestCoinData)) {
+            console.log(`* ALARM * ${alarm.coinId}: $${latestCoinData.price_usd} is ${ alarm.thresholdDirection} threshold $${alarm.priceUsdThreshold}`);
+        }
+
+        res.json(coinsData);
     });
 });
 
