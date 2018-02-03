@@ -2,7 +2,7 @@ const _ = require('underscore');
 
 const coinDataRepo = require('../dataAccess/repos/coinDataRepository');
 const alarmRepo = require('../dataAccess/repos/alarmRepository');
-const Alarm = require('../models/alarm');
+const smsService = require('../services/smsService');
 
 exports.configure = (app) => {
 
@@ -21,9 +21,15 @@ function getCoinData(req, res, done) {
                 let latestCoinData = _.findWhere(coinsData, {id: alarm.coinId});
 
                 if (latestCoinData && alarm.isTriggered(latestCoinData)) {
-                    console.log(`* ALARM * ${alarm.coinId}: $${latestCoinData.price_usd} is ${ alarm.thresholdDirection} threshold $${alarm.priceUsdThreshold}`);
+
+                    let message = `* ALARM * ${alarm.coinId}: $${latestCoinData.price_usd} is ${ alarm.thresholdDirection} threshold $${alarm.priceUsdThreshold}`;
+
+                    smsService.sendSms(message, () => {
+                        console.log(message);
+                    });
+
                 }
-                
+
             });
 
             res.json(coinsData);

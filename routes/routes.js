@@ -1,5 +1,6 @@
 const coinDataRoutes = require('./coinDataRoutes');
 const alarmRoutes = require('./alarmRoutes');
+const smsRoutes = require('./smsRoutes');
 
 exports.configure = (app) => {
 
@@ -9,5 +10,6 @@ exports.configure = (app) => {
 
     coinDataRoutes.configure(app);
     alarmRoutes.configure(app);
+    smsRoutes.configure(app);
 
 };
