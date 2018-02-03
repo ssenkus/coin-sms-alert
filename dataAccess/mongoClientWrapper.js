@@ -1,8 +1,10 @@
 const mongoClient = require('mongodb').MongoClient;
+const dotenv = require('dotenv');
 
+let config = dotenv.config().parsed;
+let dbConnectionString = config.MONGODB_CONNECTION_STRING;
+let dbName = config.MONGODB_DATABASE;
 let db = null;
-let dbConnectionString = 'mongodb://localhost:27017';
-let dbName = 'coin-sms-alert';
 
 exports.initialize = (done) => {
     if (db) return process.nextTick(done);
