@@ -1,5 +1,5 @@
-const Alarm = require('../models/alarm');
-const db = require('../dataAccess/mongoClientWrapper');
+const Alarm = require('../../models/alarm');
+const db = require('../../dataAccess/mongoClientWrapper');
 
 
 exports.createAlarm = (alarmData, done) => {

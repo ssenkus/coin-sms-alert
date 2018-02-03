@@ -1,4 +1,4 @@
-const alarmRepo = require('../repos/alarmRepository');
+const alarmRepo = require('../dataAccess/repos/alarmRepository');
 
 
 exports.configure = (app) => {
