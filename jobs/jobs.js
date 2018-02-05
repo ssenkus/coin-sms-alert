@@ -18,8 +18,8 @@ exports.start = () => {
 
     agenda.on('ready', () => {
         deleteJobsCollection(() => {
-            checkAlarmJob.register(agenda);
-            checkAlarmJob.setSchedule('one minute');
+            // checkAlarmJob.register(agenda);
+            // checkAlarmJob.setSchedule('one minute');
 
             agenda.start(() => {
                 console.log('Started jobs');
