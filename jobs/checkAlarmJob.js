@@ -4,14 +4,13 @@ const coinDataRepo = require('../dataAccess/repos/coinDataRepository');
 const alarmRepo = require('../dataAccess/repos/alarmRepository');
 const smsService = require('../services/smsService');
 
-const jobName = 'check alarm job';
+const jobName = 'Check Alarm Job';
 let agendaInstance = null;
 
 exports.define = (agenda) => {
-
     agendaInstance = agenda;
 
-    agenda.define(jobName, () => {
+    agendaInstance.define(jobName, () => {
         console.log(`'${jobName}' executed at ${new Date()}`);
 
         coinDataRepo.getCoinData((err, coinsData) => {

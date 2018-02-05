@@ -50,6 +50,6 @@ exports.alarms = () => {
     return db.collection('alarms');
 };
 
-exports.deleteAgendaCollection = (done) => {
-    return db.collection('agendaJobs').drop(done);
+exports.agendaJobs = () => {
+    return db.collection('agendaJobs');
 };

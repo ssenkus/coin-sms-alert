@@ -1,6 +1,6 @@
 const Agenda = require('agenda');
 
-const mongoClientWrapper = require('../dataAccess/mongoClientWrapper');
+const db = require('../dataAccess/mongoClientWrapper');
 const checkAlarmJob = require('./checkAlarmJob');
 
 const mongoConnectionString = `${process.env.MONGODB_CONNECTION_STRING}/${process.env.MONGODB_DATABASE}`;
@@ -42,5 +42,5 @@ exports.stop = (done) => {
 
 
 function deleteJobsCollection(done) {
-    mongoClientWrapper.deleteAgendaCollection(done);
+    db.agendaJobs().drop(done);
 }
