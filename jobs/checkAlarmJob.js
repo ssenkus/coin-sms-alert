@@ -7,7 +7,7 @@ const smsService = require('../services/smsService');
 const jobName = 'Check Alarm Job';
 let agendaInstance = null;
 
-exports.define = (agenda) => {
+exports.register = (agenda) => {
     agendaInstance = agenda;
 
     agendaInstance.define(jobName, () => {

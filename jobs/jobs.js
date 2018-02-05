@@ -18,7 +18,7 @@ exports.start = () => {
 
     agenda.on('ready', () => {
         deleteJobsCollection(() => {
-            checkAlarmJob.define(agenda);
+            checkAlarmJob.register(agenda);
             checkAlarmJob.setSchedule('one minute');
 
             agenda.start(() => {

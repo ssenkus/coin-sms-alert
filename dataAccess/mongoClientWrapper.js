@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 let config = dotenv.config().parsed;
 let dbConnectionString = config.MONGODB_CONNECTION_STRING;
 let dbName = config.MONGODB_DATABASE;
+
 let db = null;
 let connectedClient = null;
 
