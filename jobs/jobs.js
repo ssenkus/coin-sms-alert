@@ -1,10 +1,11 @@
 const Agenda = require('agenda');
+
 const mongoClientWrapper = require('../dataAccess/mongoClientWrapper');
+const checkAlarmJob = require('./checkAlarmJob');
 
 const mongoConnectionString = `${process.env.MONGODB_CONNECTION_STRING}/${process.env.MONGODB_DATABASE}`
-let agenda = null;
 
-const testJobName = 'log date to console';
+let agenda = null;
 
 
 exports.start = () => {
@@ -16,14 +17,11 @@ exports.start = () => {
         processEvery: 'one minute'
     });
 
-    agenda.define(testJobName, (job, done)=> {
-        console.log('Test job -> logged at ' + new Date());
-        done();
-    });
-
     agenda.on('ready', () => {
         deleteJobsCollection(() => {
-            agenda.every('one minute', testJobName);
+
+            checkAlarmJob.define(agenda);
+            checkAlarmJob.setSchedule('one minute');
 
             agenda.start(() => {
                 console.log('Started jobs');
