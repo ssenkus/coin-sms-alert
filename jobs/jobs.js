@@ -3,13 +3,12 @@ const Agenda = require('agenda');
 const mongoClientWrapper = require('../dataAccess/mongoClientWrapper');
 const checkAlarmJob = require('./checkAlarmJob');
 
-const mongoConnectionString = `${process.env.MONGODB_CONNECTION_STRING}/${process.env.MONGODB_DATABASE}`
+const mongoConnectionString = `${process.env.MONGODB_CONNECTION_STRING}/${process.env.MONGODB_DATABASE}`;
 
 let agenda = null;
 
 
 exports.start = () => {
-
     agenda = new Agenda({
         db: {
             address: mongoConnectionString
@@ -19,7 +18,6 @@ exports.start = () => {
 
     agenda.on('ready', () => {
         deleteJobsCollection(() => {
-
             checkAlarmJob.define(agenda);
             checkAlarmJob.setSchedule('one minute');
 
@@ -33,16 +31,13 @@ exports.start = () => {
     agenda.on('error', (err) => {
         console.log('Error with Agenda!', err);
     });
-
 };
 
 exports.stop = (done) => {
-
     agenda.stop(() => {
         console.log('Successfully shut down jobs');
         done();
     });
-
 };
 
 
