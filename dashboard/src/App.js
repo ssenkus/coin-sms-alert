@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TableRow from './TableRow'
 
 class App extends Component {
     state = {
@@ -28,13 +29,11 @@ class App extends Component {
         return (
             <div>
                 <h1>Coin Prices</h1>
+                <TableRow/>
                 <table>
                     <tbody>{this.state.coinData.map((coin) => {
                         return (
-                            <tr key={coin.id}>
-                                <td>{coin.name}</td>
-                                <td>{coin.price_usd}</td>
-                            </tr>
+                            <TableRow key={coin.id} coin={coin}></TableRow>
                         );
                     })}</tbody>
                 </table>
