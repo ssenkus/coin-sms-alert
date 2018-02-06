@@ -6,15 +6,22 @@ class TableRow extends Component {
         super(props);
 
         this.state = {
-            coin: props.coin,
+            coin: this.props.coin,
             priceUsdThreshold: '',
             thresholdDirection: 'over'
         };
 
-
         this.handleSetAlarmClick = this.handleSetAlarmClick.bind(this);
         this.handleThresholdDirectionChange = this.handleThresholdDirectionChange.bind(this);
         this.handlePriceUsdThresholdChange = this.handlePriceUsdThresholdChange.bind(this);
+    }
+
+    resetState() {
+        this.setState({
+            coin: this.props.coin,
+            priceUsdThreshold: '',
+            thresholdDirection: 'over'
+        });
     }
 
     componentDidMount() {
@@ -36,6 +43,11 @@ class TableRow extends Component {
             thresholdDirection: this.state.thresholdDirection
         };
 
+        if (isNaN(postData.priceUsdThreshold)) {
+            alert('Please enter a price threshold');
+            return;
+        }
+
         fetch('/api/alarm', {
             method: 'POST', // or 'PUT'
             body: JSON.stringify(postData),
@@ -44,11 +56,15 @@ class TableRow extends Component {
             })
         }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
+            .then(response => {
+                console.log('Success:', response);
+                alert(`Alarm created for ${this.state.coin.name}\nThreshold: ${this.state.thresholdDirection} $${this.state.priceUsdThreshold}\n`);
+                this.resetState();
+            });
     }
 
     render() {
-        if (!this.state.coin) return '';
+        if (!this.state || !this.state.coin) return '';
 
         return (
             <tr>
