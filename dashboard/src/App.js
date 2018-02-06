@@ -26,16 +26,19 @@ class App extends Component {
 
     render() {
         return (
-            <table>
-                <tbody>{this.state.coinData.map((coin) => {
-                    return (
-                        <tr key={coin.id}>
-                            <td>{coin.name}</td>
-                            <td>{coin.price_usd}</td>
-                        </tr>
-                    );
-                })}</tbody>
-            </table>
+            <div>
+                <h1>Coin Prices</h1>
+                <table>
+                    <tbody>{this.state.coinData.map((coin) => {
+                        return (
+                            <tr key={coin.id}>
+                                <td>{coin.name}</td>
+                                <td>{coin.price_usd}</td>
+                            </tr>
+                        );
+                    })}</tbody>
+                </table>
+            </div>
         );
     }
 }
