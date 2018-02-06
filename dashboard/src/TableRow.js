@@ -55,8 +55,12 @@ class TableRow extends Component {
                 'Content-Type': 'application/json'
             })
         }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('There was an error, check to console for more information!');
+            })
             .then(response => {
+                if (!response) return;
                 console.log('Success:', response);
                 alert(`Alarm created for ${this.state.coin.name}\nThreshold: ${this.state.thresholdDirection} $${this.state.priceUsdThreshold}\n`);
                 this.resetState();
