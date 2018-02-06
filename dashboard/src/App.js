@@ -24,17 +24,18 @@ class App extends Component {
 
     };
 
-    handleSetAlarmClick(coin) {
-        console.log(coin);
-    }
-
     render() {
         return (
-            <div>
-                <ul>{this.state.coinData.map((coin) => {
-                    return <li key={coin.id}>{coin.name} <button onClick={this.handleSetAlarmClick.bind(this, coin)}>Set Alarm</button></li>
-                })}</ul>
-            </div>
+            <table>
+                <tbody>{this.state.coinData.map((coin) => {
+                    return (
+                        <tr key={coin.id}>
+                            <td>{coin.name}</td>
+                            <td>{coin.price_usd}</td>
+                        </tr>
+                    );
+                })}</tbody>
+            </table>
         );
     }
 }
