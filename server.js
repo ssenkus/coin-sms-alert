@@ -9,8 +9,8 @@ const app = express();
 
 app.use(bodyParser.json({type: 'application/json'}));
 
-app.listen(3000, () => {
-    console.log('Coin Alert app listening on port 3000!');
+app.listen(8000, () => {
+    console.log('Coin Alert app listening on port 8000!');
 
     mongoClientWrapper.initialize(() => {
 
