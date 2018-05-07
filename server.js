@@ -14,11 +14,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/coins', (req, res) => {
+    console.log('REQ', req);
     request.get('https://api.coinmarketcap.com/v1/ticker/', (err, response, body) => {
         let coinsData = JSON.parse(body);
         let alarm = new Alarm({
             coinId: 'bitcoin',
-            priceUsdThreshold: 10000.00,
+            priceUsdThreshold: 1000.00,
             thresholdDirection: 'over'
         });
 
