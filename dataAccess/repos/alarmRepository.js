@@ -1,7 +1,7 @@
 const Alarm = require('../../models/alarm');
 const db = require('../../dataAccess/mongoClientWrapper');
 
-
+// Insert an alarm document record in MongoDB alarms collection
 exports.createAlarm = (alarmData, done) => {
     const collection = db.alarms();
 
@@ -10,6 +10,7 @@ exports.createAlarm = (alarmData, done) => {
     });
 };
 
+// Retrieve all alarms from MongoDB alarm collection, convert all to Alarm model objects
 exports.getAlarms = (done) => {
     const collection = db.alarms();
 
