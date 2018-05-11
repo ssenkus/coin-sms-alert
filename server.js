@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
+// Use body-parser as middleware so that we have JSON data available on Request objects
 app.use(bodyParser.json({type: 'application/json'}));
 
 // Requests to http://localhost:3000/ will respond with a JSON object
