@@ -7,7 +7,7 @@ const Alarm = require('./models/alarm');
 
 const app = express();
 
-
+// Use body-parser as middleware so that we have JSON data available on Request objects
 app.use(bodyParser.json({type: 'application/json'}));
 
 // Requests to http://localhost:3000/ will respond with a JSON object
@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
 // Requests to http://localhost:3000/api/coins will trigger a request to CoinMarketCap API,
 // respond with a JSON object with coin prices, and log a message to the console if Bitcoin is above $1000.
 app.get('/api/coins', (req, res) => {
-    console.log('REQ', req);
     request.get('https://api.coinmarketcap.com/v1/ticker/', (err, response, body) => {
         let coinsData = JSON.parse(body);
 
@@ -46,4 +45,3 @@ app.get('/api/coins', (req, res) => {
 app.listen(3000, () => {
     console.log('Coin Alert app listening on port 3000!')
 });
-
