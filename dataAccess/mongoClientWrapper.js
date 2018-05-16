@@ -8,6 +8,7 @@ let dbName = config.MONGODB_DATABASE;
 let db = null;
 let connectedClient = null;
 
+// Connect to our MongoDB database and make database client available for use
 exports.initialize = (done) => {
     if (db) return process.nextTick(done);
 
@@ -25,6 +26,7 @@ exports.initialize = (done) => {
     });
 };
 
+// Close our MongoDB connection for shutdown
 exports.dispose = (done) => {
     if (db) {
         console.log('Closing connection to mongo database: ' + dbConnectionString);
