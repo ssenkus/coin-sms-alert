@@ -17,7 +17,7 @@ exports.start = () => {
         processEvery: 'one minute'
     });
 
-    //
+    // Register event listener for when agenda starts up
     agenda.on('ready', () => {
         // Delete the jobs collection on startup
         deleteJobsCollection(() => {
